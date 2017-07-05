@@ -4,10 +4,157 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/boilerplate.css"/>
+    <link id="hostStyle" rel="stylesheet" href="css/styles.css"/>
     <title>Indigo Collection</title>
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
   </head>
-  <body>
-    <script src="js/scripts.js"></script>
+  <body class="hostElt">
+    <div class="section" style="text-align: center">
+      <button class="hostButton">Очистить</button>
+    </div>
+      <hr>
+    <div class="section">
+      <p>Шаблон</p>
+      </form>
+          <input type="text" value="1234567" class="input">
+          <button class="hostButton" style="float: right" id="searchButton">Найти</button>
+          <span class="reportSearch">Шаблон не найден</span>
+      <form>
+    </div>
+      <hr>
+    <div class="section">
+      <p>Намотка</p>
+        <div class="rollParams">
+          <select>
+            <option>Ручная</option>
+            <option>Автоматическая</option>
+          </select>
+          <select>
+            <option>Наружная</option>
+            <option>Внутренняя</option>
+          </select>
+          <select>
+            <option>Головой к машине</option>
+            <option>Ногами к машине</option>
+            <option>Ногами вперед</option>
+            <option>Головой вперед</option>
+          </select>
+        </div>
+    </div>
+      <hr>
+    <div class="section">
+      <p>Этикетки</p>
+      <div class="section">
+        <ol>
+          <li class="li">krakovckaya.eps</li>
+<!--          <li class="li">moskovskaya</li>
+          <li class="li">krakovckaya</li>
+          <li class="li">moskovskaya</li>
+          <li class="li">krakovckaya</li>
+          <li class="li">moskovskaya</li>
+          <li class="li">krakovckaya</li>
+          <li class="li">moskovskaya</li>
+          <li class="li">krakovckaya</li>
+          <li class="li">moskovskaya</li>
+          <li class="li">krakovckaya</li>
+          <li class="li">moskovskaya</li>
+          <li class="li">krakovckaya</li>
+          <li class="li">moskovskaya</li>
+          <li class="li">krakovckaya</li>
+          <li class="li">moskovskaya</li>
+          <li class="li">krakovckaya</li>
+          <li class="li">moskovskaya</li>
+-->        </ol>
+      </div>
+      <div class="section" style="text-align: center">
+        <button class="hostButton">Добавить</button>
+      </div>
+    </div>
+      <hr>
+    <div class="section">
+      <p>Красочность</p>
+      <ul class="ink">
+        <li>
+          <input type="checkbox">
+            <svg class="sampleColor">
+              <rect x="0" y="0" style="fill: white" width="13" height="13"/>
+            </svg>
+              <span>Opaque</span>
+        </li>
+        <li>
+          <input type="checkbox" checked>
+            <svg class="sampleColor">
+              <rect x="0" y="0" style="fill: cyan" width="13" height="13"/>
+            </svg>
+              <span>Cyan</span>
+        </li>
+        <li>
+          <input type="checkbox" checked>
+            <svg class="sampleColor">
+              <rect x="0" y="0" style="fill: magenta" width="13" height="13"/>
+            </svg>
+              <span>Magenta</span>
+        </li>
+        <li>
+          <input type="checkbox" checked>
+            <svg class="sampleColor">
+              <rect x="0" y="0" style="fill: yellow" width="13" height="13"/>
+            </svg>
+              <span>Yellow</span>
+        </li>
+        <li>
+          <input type="checkbox" checked>
+            <svg class="sampleColor">
+              <rect x="0" y="0" style="fill: black" width="13" height="13"/>
+            </svg>
+              <span>Black</span>
+        </li>
+        <li>
+          <input type="checkbox">
+            <svg class="sampleColor">
+              <rect x="0" y="0" style="fill: orange" width="13" height="13"/>
+            </svg>
+              <span>Orange</span>
+        </li>
+        <li>
+          <input type="checkbox">
+            <svg class="sampleColor">
+              <rect x="0" y="0" style="fill: blue" width="13" height="13"/>
+            </svg>
+              <span>Violet</span>
+        </li>
+      </ul>
+    </div>
+      <hr>
+    <div class="section">
+      <p>Горячая папка</p>
+      <span class="hotFolder">CMYK</span>
+    </div>
+      <hr>
+    <div class="section">
+      <p>Тип верстки</p>
+      <ul class="type">
+        <li class="li">
+          <input type="checkbox" checked>
+            <span class="input">Стандартная</span>
+        </li>
+        <li class="li">
+          <input type="checkbox">
+            <span class="input">Утверждение</span>
+        </li>
+        <li class="li">
+          <input type="checkbox">
+            <span class="input">Разделитель</span>
+        </li>
+      </ul>
+    </div>
+      <hr>
+    <div class="section" style="text-align: center">
+      <button class="hostButton">Сверстать</button>
+    </div>
+    <script src="js/libs/CSInterface.js"></script>
+    <script src="js/libs/jquery-2.0.2.min.js"></script>
+    <script src="js/themeManager.js"></script>
+    <script src="js/main.js"></script>
   </body>
 </html>

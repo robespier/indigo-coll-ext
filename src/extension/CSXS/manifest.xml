@@ -1,35 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<ExtensionManifest Version="5.0" ExtensionBundleId="Taflex" ExtensionBundleVersion="0.0.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ExtensionManifest ExtensionBundleId="ru.indigocollext" ExtensionBundleName="Indigo Collection" ExtensionBundleVersion="1.0" Version="4.0">
   <ExtensionList>
-    <Extension Id="ru.label.indigocollext" Version="0.0.1" />
+    <Extension Id="ru.indigocollext" Version="1.0"/>
   </ExtensionList>
   <ExecutionEnvironment>
     <HostList>
-      <Host Name="ILST" Version="17" />
+      <Host Name="ILST" Version="[17.0,18.0]"/>
     </HostList>
     <LocaleList>
-      <Locale Code="All" />
+      <Locale Code="All"/>
     </LocaleList>
     <RequiredRuntimeList>
-      <RequiredRuntime Name="CSXS" Version="4.0" />
+      <RequiredRuntime Name="CSXS" Version="4.0"/>
     </RequiredRuntimeList>
   </ExecutionEnvironment>
   <DispatchInfoList>
-    <Extension Id="ru.label.indigocollext">
+    <Extension Id="ru.indigocollext">
       <DispatchInfo>
         <Resources>
           <MainPath>./index.html</MainPath>
-          <ScriptPath>./jsx/hostscript.jsx</ScriptPath>
-          <CEFCommandLine>
-            <Parameter>--enable-nodejs</Parameter>
-          </CEFCommandLine>
         </Resources>
-        <Lifecycle>
-          <AutoVisible>true</AutoVisible>
-        </Lifecycle>
         <UI>
           <Type>Panel</Type>
           <Menu>Indigo Collection</Menu>
+          <Geometry>
+            <Size>
+              <Height>600</Height>
+              <Width>150</Width>
+            </Size>
+          </Geometry>
         </UI>
       </DispatchInfo>
     </Extension>

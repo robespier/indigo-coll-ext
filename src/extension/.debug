@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ExtensionList>
-  <Extension Id="ru.label.indigocollext">
+  <Extension Id="ru.indigocollext">
     <HostList>
       <Host Name="ILST" Port="8081"/>
     </HostList>
