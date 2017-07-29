@@ -1,5 +1,5 @@
 "use strict";
-
+const path = require("path");
 module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON("package.json"),
@@ -34,14 +34,18 @@ module.exports = function(grunt) {
           },
         ],
       },
-/*
       deploy: {
         expand: true,
         cwd: "dist/",
-        src: "**",
+        src: [".debug", "**"],
         dest: path.join(process.env.APPDATA, "Adobe/CEP/extensions", "<%= pkg.name %>")
+      },
+      deploy2: {
+        expand: true,
+        cwd: "dist/",
+        src: [".debug", "**"],
+        dest: path.join(process.env.APPDATA, "Adobe/CEPServiceManager4/extensions", "<%= pkg.name %>")
       }
-*/
     },
   });
 
