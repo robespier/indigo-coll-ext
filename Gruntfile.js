@@ -23,7 +23,7 @@ module.exports = function(grunt) {
         dest: "dist/assets/styles.css",
       },
       js: {
-        src: ["src/vendor/*.js", "src/panel/*.js"],
+        src: ["src/*.js", "src/vendor/*.js", "src/panel/*.js"],
         dest: "dist/assets/scripts.js"
       }
     },
