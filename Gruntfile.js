@@ -18,10 +18,14 @@ module.exports = function(grunt) {
       options: {
         separator: ";",
       },
-      dist: {
+      css: {
         src: ["src/css/**"],
         dest: "dist/assets/styles.css",
       },
+      js: {
+        src: ["src/vendor/*.js", "src/panel/*.js"],
+        dest: "dist/assets/scripts.js"
+      }
     },
     copy: {
       main: {

@@ -2,7 +2,7 @@ block body
   .section
     p Шаблон
       form
-        input(type="text" value="1234567").input
-        button(style="float: right").hostButton#searchButton Найти
+        input(type="text").input
+        button.hostButton#searchButton(style="float: right" onclick="validateTemplate()") Найти
         span.reportSearch Шаблон не найден
   hr

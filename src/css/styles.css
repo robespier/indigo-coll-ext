@@ -80,6 +80,10 @@ form {
   color: red;
   float: left;
 }
+hr {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
 /*
 Those classes will be edited at runtime with values specified
 by the settings of the CC application
