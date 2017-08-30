@@ -2,7 +2,7 @@ block body
   .section
     p Шаблон
       form
-        input(type="text").input
+        input(ng-model="workset.template_number" type="text").input
         button.hostButton#searchButton(style="float: right" onclick="validateTemplate()") Найти
         span.reportSearch Шаблон не найден
   hr

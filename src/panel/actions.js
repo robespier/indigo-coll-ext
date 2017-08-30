@@ -1,7 +1,3 @@
-function resetPanel() {
-  alert("resetPanel")
-};
-
 function validateTemplate() {
   alert("validateTemplate")
 };

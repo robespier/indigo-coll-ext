@@ -2,39 +2,9 @@ block body
   .section
     p Красочность
       ul.ink
-        li
-          input(type="checkbox")
-          svg.sampleColor
-            rect(style="fill: white" width="13" height="13" x="0" y="0")
-          span.input Opaque
-        li
-          input(type="checkbox")
-          svg.sampleColor
-            rect(style="fill: cyan" width="13" height="13" x="0" y="0")
-          span.input Cyan
-        li
-          input(type="checkbox")
-          svg.sampleColor
-            rect(style="fill: magenta" width="13" height="13" x="0" y="0")
-          span.input Magenta
-        li
-          input(type="checkbox")
-          svg.sampleColor
-            rect(style="fill: yellow" width="13" height="13" x="0" y="0")
-          span.input Yellow
-        li
-          input(type="checkbox")
-          svg.sampleColor
-            rect(style="fill: black" width="13" height="13" x="0" y="0")
-          span.input Black
-        li
-          input(type="checkbox")
-          svg.sampleColor
-            rect(style="fill: orange" width="13" height="13" x="0" y="0")
-          span.input Orange
-        li
-          input(type="checkbox")
-          svg.sampleColor
-            rect(style="fill: blue" width="13" height="13" x="0" y="0")
-          span.input Violet
+        li(ng-repeat="ink in workset.inks")
+            input(ng-model="workset.inks[$index].used" ng-change="calcHF()" type="checkbox")
+            svg.sampleColor
+              rect(style="fill:{{workset.inks[$index].label}}" width="13" height="13" x="0" y="0")
+            span.input(ng-bind="workset.inks[$index].name")
   hr
