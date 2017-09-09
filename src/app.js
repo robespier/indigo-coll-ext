@@ -103,4 +103,38 @@
         return roll;
       };
   }]);
+
+/**
+ * Проверка доступности ресурсов (сетевых дисков)
+ *
+ * Для нормальной работы приложения должны быть подключены три сетевых диска:
+  - Диск "T" - template
+  - Диск "Y" - jobcontainer
+  - Диск "H" - hotfolder
+ */
+
+    var fs = require("fs");
+      var template_root = "T:";
+      var jobcontainer_root = "Y:";
+      var hotfolder_root = "H:";
+      fs.stat(template_root, function(err, stats) {
+        if (err) {
+          alert("Подключите сетевой диск 'T' для директории с шаблонами.\nДля закрытия этого окна нажмите клавишу 'Esc'");
+        }
+        else {
+          fs.stat(jobcontainer_root, function(err, stats) {
+            if (err) {
+              alert("Подключите сетевой диск 'Y' для директории с рабочими файлами.\nДля закрытия этого окна нажмите клавишу 'Esc'");
+            }
+            else {
+              fs.stat(hotfolder_root, function(err, stats) {
+                if (err) {
+                  alert("Подключите сетевой диск 'H' для директории с 'горячими' папками.\nДля закрытия этого окна нажмите клавишу 'Esc'");
+                }
+              })
+            }
+          })
+        }
+      });
+
 })();
