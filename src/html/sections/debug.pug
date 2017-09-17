@@ -1,7 +1,5 @@
 block body
   hr
   p Debug
-    .section#sectionButton
-      button.hostButton(onclick="location.reload()") Reload
-      p(style="text-align: left") Намотка
-      span(ng-bind="workset.roll")
+    p(style="text-align: left") Намотка:
+    span(ng-bind="workset.roll_number")

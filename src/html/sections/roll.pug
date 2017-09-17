@@ -2,15 +2,18 @@ block body
   .section
     p Намотка
       .rollParams
-        select
-          option(ng-model="workset.roll_method" ng-selected="{{workset.roll_method == 'hand'}}" value="hand") Ручная
-          option(ng-model="workset.roll_method" ng-selected="{{workset.roll_method == 'auto'}}" value="auto") Автоматическая
-        select
-          option(ng-model="workset.roll_type" ng-selected="{{workset.roll_type == 'outside'}}" value="outside") Наружная
-          option(ng-model="workset.roll_type" ng-selected="{{workset.roll_type == 'inside'}}" value="inside")  Внутренняя
-        select
-          option(ng-model="workset.roll_direct" ng-selected="{{workset.roll_direct == 'head_mashine'}}" value="head_mashine") Головой к машине
-          option(ng-model="workset.roll_direct" ng-selected="{{workset.roll_direct == 'foot_mashine'}}" value="foot_mashine") Ногами к машине
-          option(ng-model="workset.roll_direct" ng-selected="{{workset.roll_direct == 'foot_forward'}}" value="foot_forward") Ногами вперед
-          option(ng-model="workset.roll_direct" ng-selected="{{workset.roll_direct == 'head_forward'}}" value="head_forward") Головой вперед
-  hr
+        select(
+          ng-model="default.roll_method"
+          ng-options="option.value as option.name for option in workset.roll_method"
+          ng-change="setRollMethod(default.roll_method, $scope.default.roll_type, $scope.default.roll_direct)"
+        )
+        select(
+          ng-model="default.roll_type"
+          ng-options="option.value as option.name for option in workset.roll_type"
+          ng-change="getRollNumber(default.roll_type, default.roll_direct)"
+        )
+        select(
+          ng-model="default.roll_direct"
+          ng-options="option.value as option.name for option in workset.roll_direct"
+          ng-change="getRollNumber(default.roll_type, default.roll_direct)"
+        ) 

@@ -2,14 +2,28 @@
   var app = angular.module("ice", []);
   app.controller("ext", ["$scope", function($scope) {
 
-/**
- * Значения по умолчанию
- */
       $scope.workset = {
         template_number: "",
-        roll_method: "hand",
-        roll_type: "outside",
-        roll_direct: "head_forward",
+        roll_method: [
+          {value: "hand", name: "Ручная"},
+          {value: "auto", name: "Автоматическая"}
+        ],
+        roll_type: [
+          {value: "outside", name: "Наружная"},
+          {value: "inside", name: "Внутренняя"}
+        ],
+        roll_direct: [
+          {value: "head_mashine", name: "Головой к машине"},
+          {value: "foot_mashine", name: "Ногами к машине"},
+          {value: "foot_forward", name: "Ногами вперед"},
+          {value: "head_forward", name: "Головой вперед"}
+        ],
+        roll_number: 0,
+/*        selectState: [
+          {value: "disabled"},
+          {value: ""}
+        ],
+*/
         label_stock: [],
         inks: [
   				{name: "Opaque", label: "white", used: false},
@@ -18,10 +32,20 @@
   				{name: "Yellow", label: "yellow", used: true},
   				{name: "Black", label: "black", used: true},
   				{name: "Orange", label: "orange", used: false},
-  				{name: "Violet", label: "blue", used: false},
+  				{name: "Violet", label: "blue", used: false}
   			],
         hot_folder: "CMYK",
         collection_type: "standart",
+      };
+
+/**
+ * Значения по умолчанию
+ */
+      $scope.default = {
+        roll_method: $scope.workset.roll_method[0].value,
+        roll_type: $scope.workset.roll_type[0].value,
+        roll_direct: $scope.workset.roll_direct[0].value,
+//        selectState: $scope.workset.selectState[0].value
       };
 
 /**
@@ -55,7 +79,7 @@
  * @return {string} hotfolderName
  */
   		function getHotFolder(num) {
-  			var hotfolderName = '';
+  			var hotfolderName = "";
   			if (num % 4 === 0) {
   				if (num <= 60) {
   					hotfolderName = "CMYK";
@@ -68,39 +92,43 @@
   			return hotfolderName;
   		}
 
+/*
+* Задает метод намотки
+*/
+
+      $scope.setRollMethod = function(roll_method, roll_type, roll_direct) {
+        var roll_number;
+        switch (roll_method) {
+          case "hand":
+            roll_number = 0;
+            break;
+          case "auto":
+            roll_number = getRollNumber(roll_type, roll_direct);
+            break;
+        };
+          this.workset.roll_number = roll_number;
+//          this.workset.selectState = selectState;
+        return roll_number
+;
+      };
+
+
 /**
-* Задает направление намотки
-*
+* Определяет номер намотки
 *
 */
-      $scope.getRoll = function() {
-        var roll;
-        if((this.workset.roll_type==='outside')&&(this.workset.roll_dir==='head_mashine')){
-          roll='roll_1_6';
-        }
-        if((this.workset.roll_type==='inside')&&(this.workset.roll_dir==='head_mashine')){
-          roll='roll_1_6';
-        }
-        if((this.workset.roll_type==='outside')&&(this.workset.roll_dir==='foot_mashine')){
-          roll='roll_2_5';
-        }
-        if((this.workset.roll_type==='inside')&&(this.workset.roll_dir==='foot_mashine')){
-          roll='roll_2_5';
-        }
-        if((this.workset.roll_type==='outside')&&(this.workset.roll_dir==='foot_forward')){
-          roll='roll_3_7';
-        }
-        if((this.workset.roll_type==='inside')&&(this.workset.roll_dir==='foot_forward')){
-          roll='roll_3_7';
-        }
-        if((this.workset.roll_type==='outside')&&(this.workset.roll_dir==='head_forward')){
-          roll='roll_4_8';
-        }
-        if((this.workset.roll_type==='inside')&&(this.workset.roll_dir==='head_forward')){
-          roll='roll_4_8';
-        }
-        $scope.workset.roll = roll;
-        return roll;
+      $scope.getRollNumber = function(r_type, r_direct) {
+        var r_number;
+          if((r_type==="outside")&&(r_direct==="head_mashine")) {r_number=1;}
+          if((r_type==="inside")&&(r_direct==="head_mashine")) {r_number=6;}
+          if((r_type==="outside")&&(r_direct==="foot_mashine")) {r_number=2;}
+          if((r_type==="inside")&&(r_direct==="foot_mashine")) {r_number=5;}
+          if((r_type==="outside")&&(r_direct==="foot_forward")) {r_number=3;}
+          if((r_type==="inside")&&(r_direct==="foot_forward")) {r_number=7;}
+          if((r_type==="outside")&&(r_direct==="head_forward")) {r_number=4;}
+          if((r_type==="inside")&&(r_direct==="head_forward")) {r_number=8;}
+        this.workset.roll_number = r_number;
+        return r_number;
       };
   }]);
 
