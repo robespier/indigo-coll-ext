@@ -19,12 +19,11 @@
           {value: "head_forward", name: "Головой вперед"}
         ],
         roll_number: 0,
-/*        selectState: [
-          {value: "disabled"},
-          {value: ""}
+        select: [
+          {value: true},
+          {value: false}
         ],
-*/
-        label_stock: [],
+        label_stock: new Array(),
         inks: [
   				{name: "Opaque", label: "white", used: false},
   				{name: "Cyan", label: "cyan", used: true},
@@ -45,7 +44,8 @@
         roll_method: $scope.workset.roll_method[0].value,
         roll_type: $scope.workset.roll_type[0].value,
         roll_direct: $scope.workset.roll_direct[0].value,
-//        selectState: $scope.workset.selectState[0].value
+        roll_number: $scope.workset.roll_number,
+        select: $scope.workset.select[0].value
       };
 
 /**
@@ -101,14 +101,17 @@
         switch (roll_method) {
           case "hand":
             roll_number = 0;
+            this.workset.roll_number = roll_number;
+            this.default.select = true;
             break;
           case "auto":
-            roll_number = getRollNumber(roll_type, roll_direct);
+            roll_number = this.getRollNumber(roll_type, roll_direct);
+            this.default.roll_number = roll_number;
+            this.default.select = false;
             break;
         };
-          this.workset.roll_number = roll_number;
 //          this.workset.selectState = selectState;
-        return roll_number
+//        return roll_number
 ;
       };
 
@@ -128,7 +131,7 @@
           if((r_type==="outside")&&(r_direct==="head_forward")) {r_number=4;}
           if((r_type==="inside")&&(r_direct==="head_forward")) {r_number=8;}
         this.workset.roll_number = r_number;
-        return r_number;
+//        return r_number;
       };
   }]);
 

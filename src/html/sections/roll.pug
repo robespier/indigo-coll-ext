@@ -5,14 +5,16 @@ block body
         select(
           ng-model="default.roll_method"
           ng-options="option.value as option.name for option in workset.roll_method"
-          ng-change="setRollMethod(default.roll_method, $scope.default.roll_type, $scope.default.roll_direct)"
+          ng-change="setRollMethod(default.roll_method, default.roll_type, default.roll_direct)"
         )
         select(
+          ng-disabled="default.select"
           ng-model="default.roll_type"
           ng-options="option.value as option.name for option in workset.roll_type"
           ng-change="getRollNumber(default.roll_type, default.roll_direct)"
         )
         select(
+          ng-disabled="default.select"
           ng-model="default.roll_direct"
           ng-options="option.value as option.name for option in workset.roll_direct"
           ng-change="getRollNumber(default.roll_type, default.roll_direct)"
