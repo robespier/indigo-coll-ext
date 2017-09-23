@@ -40,7 +40,7 @@ module.exports = function(grunt) {
         expand: true,
         cwd: "dist/",
         src: [".debug", "**"],
-        dest: path.join(process.env.APPDATA, "Adobe/CEP/extensions", "<%= pkg.name %>")
+        dest: path.join(process.env.APPDATA || '/tmp', "Adobe/CEP/extensions", "<%= pkg.name %>")
       },
       /*
             deploy2: {
