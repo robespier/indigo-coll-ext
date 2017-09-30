@@ -4,7 +4,8 @@ block body
       .section
         ol
           li.li(ng-repeat="label in workset.label_stock")
-            p(ng-bind="workset.label_stock[$index]")
+            p(ng-bind="workset.label_stock[$index].substring(14)")
   .section#sectionButton
     button.hostButton(ng-click="addLabels()") Добавить
+    button.hostButton(ng-click="removeLabels()") Удалить все
   hr

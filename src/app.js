@@ -76,7 +76,7 @@
         bit <<= 1;
       }
       return out;
-    }
+    };
 
     /**
      * Определяет hotfolder исходя из красочности задания
@@ -96,10 +96,11 @@
         hotfolderName = "CMYKOV_White";
       }
       return hotfolderName;
-    }
+    };
 
-    /*
+    /**
      * Задает метод намотки
+     *
      */
 
     $scope.setRollMethod = function(roll_method, roll_type, roll_direct) {
@@ -115,10 +116,7 @@
           this.default.roll_number = roll_number;
           this.default.select = false;
           break;
-      };
-      //          this.workset.selectState = selectState;
-      //        return roll_number
-      ;
+      }
     };
 
 
@@ -153,28 +151,53 @@
         r_number = 8;
       }
       this.workset.roll_number = r_number;
-      //        return r_number;
     };
-    
+
     /**
      * Добавление этикеток
      *
-    */
+     */
 
-        $scope.addLabels = function () {
-          var dialog = cep.fs.showOpenDialog(true, false, "Выберите этикетки", "Y:", ["eps"]);
-          if(dialog.err) {
-            alert("что-то пошло не так...")
-          } else {
-              for (var i = 0; i < dialog.data.length; i++) {
-                this.workset.label_stock.push(dialog.data[i]);
-              }
-              if (this.workset.label_stock.length > 1) {
-                this.workset.collection_type[1].used = true;
-                this.workset.collection_type[2].used = true;
-              }
+      $scope.addLabels = function () {
+        var dialog = cep.fs.showOpenDialog(true, false, "Выберите этикетки", "Y:", ["eps"]);
+        if(dialog.err) {
+          alert("что-то пошло не так...")
+        } else {
+            for (var i = 0; i < dialog.data.length; i++) {
+              this.workset.label_stock.push(dialog.data[i]);
+            };
+            var length = this.workset.label_stock.length;
+            setCollType(length);
           }
-        };
+      };
+
+    /**
+     * Удаление этикеток
+     *
+     */
+
+     $scope.removeLabels = function () {
+        this.workset.label_stock.splice(0, this.workset.label_stock.length);
+        var length = this.workset.label_stock.length;
+        setCollType(length);
+     };
+
+     /**
+     * Определение типа верстки в зависимости от кол-ва этикеток
+     *
+     */
+
+     function setCollType(len) {
+       if (len > 1) {
+         $scope.workset.collection_type[0].used = true;
+         $scope.workset.collection_type[1].used = true;
+         $scope.workset.collection_type[2].used = true;
+       } else {
+         $scope.workset.collection_type[0].used = true;
+         $scope.workset.collection_type[1].used = false;
+         $scope.workset.collection_type[2].used = false;
+         }
+     }
   }]);
 
   /**

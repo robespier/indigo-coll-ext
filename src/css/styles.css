@@ -51,7 +51,8 @@ ul {
 ol {
   padding-left: 20px;
   padding-right: 0px;
-  max-height: 200px;
+  max-height: 300px;
+  overflow-x: hidden;
   overflow-y: auto;
   -webkit-margin-before: 0px;
   -webkit-margin-after: 0px;
