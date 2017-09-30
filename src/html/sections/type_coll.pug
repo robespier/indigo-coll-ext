@@ -2,13 +2,7 @@ block body
   .section
     p Тип верстки
       ul.type
-        li.li
-          input(type="checkbox" checked)
-          span.input Стандартная
-        li.li
-          input(type="checkbox")
-          span.input Утверждение
-        li.li
-          input(type="checkbox")
-          span.input Разделитель
+        li.li(ng-repeat="type in workset.collection_type")
+          input(ng-model="workset.collection_type[$index].used" type="checkbox")
+          span.input(ng-bind="workset.collection_type[$index].name")
   hr

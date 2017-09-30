@@ -3,8 +3,8 @@ block body
     p Этикетки
       .section
         ol
-          li.li krakovckaya
-          li.li moskovskaya
+          li.li(ng-repeat="label in workset.label_stock")
+            p(ng-bind="workset.label_stock[$index]")
   .section#sectionButton
-    button.hostButton(onclick="addLabels()") Добавить
+    button.hostButton(ng-click="addLabels()") Добавить
   hr

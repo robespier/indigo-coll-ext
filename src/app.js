@@ -23,7 +23,7 @@
           {value: true},
           {value: false}
         ],
-        label_stock: new Array(),
+        label_stock: [],
         inks: [
   				{name: "Opaque", label: "white", used: false},
   				{name: "Cyan", label: "cyan", used: true},
@@ -34,7 +34,11 @@
   				{name: "Violet", label: "blue", used: false}
   			],
         hot_folder: "CMYK",
-        collection_type: "standart",
+        collection_type: [
+          {value: "standart", name: "Стандартная", used: true},
+          {value: "approve", name: "Утверждение", used: false},
+          {value: "divider", name: "Разделитель", used: false}
+        ]
       };
 
 /**
@@ -92,8 +96,10 @@
   			return hotfolderName;
   		}
 
-/*
+
+/**
 * Задает метод намотки
+*
 */
 
       $scope.setRollMethod = function(roll_method, roll_type, roll_direct) {
@@ -110,16 +116,13 @@
             this.default.select = false;
             break;
         };
-//          this.workset.selectState = selectState;
-//        return roll_number
-;
       };
-
 
 /**
 * Определяет номер намотки
 *
 */
+
       $scope.getRollNumber = function(r_type, r_direct) {
         var r_number;
           if((r_type==="outside")&&(r_direct==="head_mashine")) {r_number=1;}
@@ -131,8 +134,29 @@
           if((r_type==="outside")&&(r_direct==="head_forward")) {r_number=4;}
           if((r_type==="inside")&&(r_direct==="head_forward")) {r_number=8;}
         this.workset.roll_number = r_number;
-//        return r_number;
       };
+
+
+/**
+ * Добавление этикеток
+ *
+*/
+
+    $scope.addLabels = function () {
+      var dialog = cep.fs.showOpenDialog(true, false, "Выберите этикетки", "Y:", ["eps"]);
+      if(dialog.err) {
+        alert("что-то пошло не так...")
+      } else {
+          for (var i = 0; i < dialog.data.length; i++) {
+            this.workset.label_stock.push(dialog.data[i]);
+          }
+          if (this.workset.label_stock.length > 1) {
+            this.workset.collection_type[1].used = true;
+            this.workset.collection_type[2].used = true;
+          }
+      }
+    };
+
   }]);
 
 /**
