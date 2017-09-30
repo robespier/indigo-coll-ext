@@ -29,14 +29,12 @@ module.exports = function(grunt) {
     },
     copy: {
       main: {
-        files: [
-          {
-            expand: true,
-            cwd: "src/extension/",
-            src: [".debug", "CSXS/**"],
-            dest: "dist/"
-          },
-        ],
+        files: [{
+          expand: true,
+          cwd: "src/extension/",
+          src: [".debug", "CSXS/**"],
+          dest: "dist/"
+        }, ],
       },
       deploy: {
         expand: true,
@@ -44,14 +42,14 @@ module.exports = function(grunt) {
         src: [".debug", "**"],
         dest: path.join(process.env.APPDATA, "Adobe/CEP/extensions", "<%= pkg.name %>")
       },
-
-      deploy2: {
-        expand: true,
-        cwd: "dist/",
-        src: [".debug", "**"],
-        dest: path.join(process.env.APPDATA, "Adobe/CEPServiceManager4/extensions", "<%= pkg.name %>")
-      }
-
+      /*
+            deploy2: {
+              expand: true,
+              cwd: "dist/",
+              src: [".debug", "**"],
+              dest: path.join(process.env.APPDATA, "Adobe/CEPServiceManager4/extensions", "<%= pkg.name %>")
+            }
+      */
     },
   });
 

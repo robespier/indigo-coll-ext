@@ -41,155 +41,171 @@
         ]
       };
 
-/**
- * Значения по умолчанию
- */
-      $scope.default = {
-        roll_method: $scope.workset.roll_method[0].value,
-        roll_type: $scope.workset.roll_type[0].value,
-        roll_direct: $scope.workset.roll_direct[0].value,
-        roll_number: $scope.workset.roll_number,
-        select: $scope.workset.select[0].value
-      };
-
-/**
- * Вычислять хотфолдер при клике по красочности
- */
-      $scope.calcHF = function() {
-      	var inks = toDEC(this.workset.inks);
-      	this.workset.hot_folder = getHotFolder(inks);
-      };
-
-
-/**
- * Переводит массив "0"/"1" из двоичной системы в десятичную
- *
- * @param {array} dec Array
- * @return {int} out
- */
-  		function toDEC(dec) {
-  			var out = 0, len = dec.length, bit = 1;
-  			while(len--) {
-  				out += dec[len].used ? bit : 0;
-  				bit <<= 1;
-  			}
-  			return out;
-  		}
-
-/**
- * Определяет hotfolder исходя из красочности задания
- *
- * @param {int} num
- * @return {string} hotfolderName
- */
-  		function getHotFolder(num) {
-  			var hotfolderName = "";
-  			if (num % 4 === 0) {
-  				if (num <= 60) {
-  					hotfolderName = "CMYK";
-  				} else {
-  				hotfolderName = "CMYKW";
-  				}
-  			} else {
-  				hotfolderName = "CMYKOV_White";
-  			}
-  			return hotfolderName;
-  		}
-
-
-/**
-* Задает метод намотки
-*
-*/
-
-      $scope.setRollMethod = function(roll_method, roll_type, roll_direct) {
-        var roll_number;
-        switch (roll_method) {
-          case "hand":
-            roll_number = 0;
-            this.workset.roll_number = roll_number;
-            this.default.select = true;
-            break;
-          case "auto":
-            roll_number = this.getRollNumber(roll_type, roll_direct);
-            this.default.roll_number = roll_number;
-            this.default.select = false;
-            break;
-        };
-      };
-
-/**
-* Определяет номер намотки
-*
-*/
-
-      $scope.getRollNumber = function(r_type, r_direct) {
-        var r_number;
-          if((r_type==="outside")&&(r_direct==="head_mashine")) {r_number=1;}
-          if((r_type==="inside")&&(r_direct==="head_mashine")) {r_number=6;}
-          if((r_type==="outside")&&(r_direct==="foot_mashine")) {r_number=2;}
-          if((r_type==="inside")&&(r_direct==="foot_mashine")) {r_number=5;}
-          if((r_type==="outside")&&(r_direct==="foot_forward")) {r_number=3;}
-          if((r_type==="inside")&&(r_direct==="foot_forward")) {r_number=7;}
-          if((r_type==="outside")&&(r_direct==="head_forward")) {r_number=4;}
-          if((r_type==="inside")&&(r_direct==="head_forward")) {r_number=8;}
-        this.workset.roll_number = r_number;
-      };
-
-
-/**
- * Добавление этикеток
- *
-*/
-
-    $scope.addLabels = function () {
-      var dialog = cep.fs.showOpenDialog(true, false, "Выберите этикетки", "Y:", ["eps"]);
-      if(dialog.err) {
-        alert("что-то пошло не так...")
-      } else {
-          for (var i = 0; i < dialog.data.length; i++) {
-            this.workset.label_stock.push(dialog.data[i]);
-          }
-          if (this.workset.label_stock.length > 1) {
-            this.workset.collection_type[1].used = true;
-            this.workset.collection_type[2].used = true;
-          }
-      }
+    /**
+     * Значения по умолчанию
+     */
+    $scope.default = {
+      roll_method: $scope.workset.roll_method[0].value,
+      roll_type: $scope.workset.roll_type[0].value,
+      roll_direct: $scope.workset.roll_direct[0].value,
+      roll_number: $scope.workset.roll_number,
+      select: $scope.workset.select[0].value
     };
 
+    /**
+     * Вычислять хотфолдер при клике по красочности
+     */
+    $scope.calcHF = function() {
+      var inks = toDEC(this.workset.inks);
+      this.workset.hot_folder = getHotFolder(inks);
+    };
+
+
+    /**
+     * Переводит массив "0"/"1" из двоичной системы в десятичную
+     *
+     * @param {array} dec Array
+     * @return {int} out
+     */
+    function toDEC(dec) {
+      var out = 0,
+        len = dec.length,
+        bit = 1;
+      while (len--) {
+        out += dec[len].used ? bit : 0;
+        bit <<= 1;
+      }
+      return out;
+    }
+
+    /**
+     * Определяет hotfolder исходя из красочности задания
+     *
+     * @param {int} num
+     * @return {string} hotfolderName
+     */
+    function getHotFolder(num) {
+      var hotfolderName = "";
+      if (num % 4 === 0) {
+        if (num <= 60) {
+          hotfolderName = "CMYK";
+        } else {
+          hotfolderName = "CMYKW";
+        }
+      } else {
+        hotfolderName = "CMYKOV_White";
+      }
+      return hotfolderName;
+    }
+
+    /*
+     * Задает метод намотки
+     */
+
+    $scope.setRollMethod = function(roll_method, roll_type, roll_direct) {
+      var roll_number;
+      switch (roll_method) {
+        case "hand":
+          roll_number = 0;
+          this.workset.roll_number = roll_number;
+          this.default.select = true;
+          break;
+        case "auto":
+          roll_number = this.getRollNumber(roll_type, roll_direct);
+          this.default.roll_number = roll_number;
+          this.default.select = false;
+          break;
+      };
+      //          this.workset.selectState = selectState;
+      //        return roll_number
+      ;
+    };
+
+
+    /**
+     * Определяет номер намотки
+     *
+     */
+    $scope.getRollNumber = function(r_type, r_direct) {
+      var r_number;
+      if ((r_type === "outside") && (r_direct === "head_mashine")) {
+        r_number = 1;
+      }
+      if ((r_type === "inside") && (r_direct === "head_mashine")) {
+        r_number = 6;
+      }
+      if ((r_type === "outside") && (r_direct === "foot_mashine")) {
+        r_number = 2;
+      }
+      if ((r_type === "inside") && (r_direct === "foot_mashine")) {
+        r_number = 5;
+      }
+      if ((r_type === "outside") && (r_direct === "foot_forward")) {
+        r_number = 3;
+      }
+      if ((r_type === "inside") && (r_direct === "foot_forward")) {
+        r_number = 7;
+      }
+      if ((r_type === "outside") && (r_direct === "head_forward")) {
+        r_number = 4;
+      }
+      if ((r_type === "inside") && (r_direct === "head_forward")) {
+        r_number = 8;
+      }
+      this.workset.roll_number = r_number;
+      //        return r_number;
+    };
+    
+    /**
+     * Добавление этикеток
+     *
+    */
+
+        $scope.addLabels = function () {
+          var dialog = cep.fs.showOpenDialog(true, false, "Выберите этикетки", "Y:", ["eps"]);
+          if(dialog.err) {
+            alert("что-то пошло не так...")
+          } else {
+              for (var i = 0; i < dialog.data.length; i++) {
+                this.workset.label_stock.push(dialog.data[i]);
+              }
+              if (this.workset.label_stock.length > 1) {
+                this.workset.collection_type[1].used = true;
+                this.workset.collection_type[2].used = true;
+              }
+          }
+        };
   }]);
 
-/**
- * Проверка доступности ресурсов (сетевых дисков)
- *
- * Для нормальной работы приложения должны быть подключены три сетевых диска:
-  - Диск "T" - template
-  - Диск "Y" - jobcontainer
-  - Диск "H" - hotfolder
- */
+  /**
+   * Проверка доступности ресурсов (сетевых дисков)
+   *
+   * Для нормальной работы приложения должны быть подключены три сетевых диска:
+    - Диск "T" - template
+    - Диск "Y" - jobcontainer
+    - Диск "H" - hotfolder
+   */
 
-    var fs = require("fs");
-      var template_root = "T:";
-      var jobcontainer_root = "Y:";
-      var hotfolder_root = "H:";
-      fs.stat(template_root, function(err, stats) {
+  var fs = require("fs");
+  var template_root = "T:";
+  var jobcontainer_root = "Y:";
+  var hotfolder_root = "H:";
+  fs.stat(template_root, function(err, stats) {
+    if (err) {
+      alert("Подключите сетевой диск 'T' для директории с шаблонами.\nДля закрытия этого окна нажмите клавишу 'Esc'");
+    } else {
+      fs.stat(jobcontainer_root, function(err, stats) {
         if (err) {
-          alert("Подключите сетевой диск 'T' для директории с шаблонами.\nДля закрытия этого окна нажмите клавишу 'Esc'");
-        }
-        else {
-          fs.stat(jobcontainer_root, function(err, stats) {
+          alert("Подключите сетевой диск 'Y' для директории с рабочими файлами.\nДля закрытия этого окна нажмите клавишу 'Esc'");
+        } else {
+          fs.stat(hotfolder_root, function(err, stats) {
             if (err) {
-              alert("Подключите сетевой диск 'Y' для директории с рабочими файлами.\nДля закрытия этого окна нажмите клавишу 'Esc'");
-            }
-            else {
-              fs.stat(hotfolder_root, function(err, stats) {
-                if (err) {
-                  alert("Подключите сетевой диск 'H' для директории с 'горячими' папками.\nДля закрытия этого окна нажмите клавишу 'Esc'");
-                }
-              })
+              alert("Подключите сетевой диск 'H' для директории с 'горячими' папками.\nДля закрытия этого окна нажмите клавишу 'Esc'");
             }
           })
         }
-      });
+      })
+    }
+  });
 
 })();
