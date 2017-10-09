@@ -4,6 +4,10 @@
 
       $scope.workset = {
         template_number: "",
+        template_alert: {
+          message: "",
+          status: ""
+        },
         roll_method: [
           {value: "hand", name: "Ручная"},
           {value: "auto", name: "Автоматическая"}
@@ -159,12 +163,16 @@
      */
 
       $scope.addLabels = function () {
+        var path = require("path");
         var dialog = cep.fs.showOpenDialog(true, false, "Выберите этикетки", "Y:", ["eps"]);
         if(dialog.err) {
           alert("что-то пошло не так...")
         } else {
             for (var i = 0; i < dialog.data.length; i++) {
-              this.workset.label_stock.push(dialog.data[i]);
+              var ext = path.extname(dialog.data[i]);
+              if (ext === ".eps") {
+                this.workset.label_stock.push(dialog.data[i]);
+              }
             };
             var length = this.workset.label_stock.length;
             setCollType(length);
@@ -197,7 +205,47 @@
          $scope.workset.collection_type[1].used = false;
          $scope.workset.collection_type[2].used = false;
          }
-     }
+     };
+
+     /**
+     * Получение имени этикетки из стороки
+     *
+     */
+
+     $scope.getLabelName = function (label_path) {
+       var path = require("path");
+       var name = path.basename(label_path, ".eps");
+       return name;
+     };
+
+     /**
+     * Валидация номера шаблона
+     *
+     */
+
+     $scope.validateTemplate = function() {
+       var template = $scope.workset.template_number;
+       if(template == "") {
+          $scope.workset.template_alert.message = "Bведите номер шаблона";
+       } else {
+           var fs = require("fs");
+           var template_root = "T:";
+           fs.readdir(template_root, function(err, files) {
+             if (err) {
+               alert("Папка шаблонов пуста");
+             } else {
+               for (var i = 0; i < files.length; i++) {
+                 if (template + ".ait" == files[i]) {
+                   $scope.workset.template_alert.message = "Шаблон найден";
+                   break;
+                 } else {
+                   $scope.workset.template_alert.message = "Шаблон не найден";
+                   }
+               }
+             }
+           });
+        }
+      }
   }]);
 
   /**

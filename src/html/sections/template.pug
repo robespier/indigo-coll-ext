@@ -2,7 +2,6 @@ block body
   .section
     p Шаблон
       form
-        input(ng-model="workset.template_number" type="text").input
-        button.hostButton#searchButton(style="float: right" onclick="validateTemplate()") Найти
-        span.reportSearch Шаблон не найден
+        input.input(ng-model="workset.template_number" ng-change="validateTemplate()" type="text")
+        span.reportSearch(ng-bind="workset.template_alert.message")
   hr
