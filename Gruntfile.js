@@ -51,11 +51,41 @@ module.exports = function(grunt) {
             }
       */
     },
+    exec: {
+      // Task properties fill below
+    },
   });
+
+  /**
+   * Deploy changes with rsync on remote machines using `exec` tasks
+   * Export host list in follow form:
+   * export GRUNT_HOSTS="local:127.0.0.1,corr1:192.168.0.152,mari:192.168.0.172"
+   * Then, run `grunt exec:deploy-corr1`
+   */
+  if (process.env.GRUNT_HOSTS) {
+    const devHosts = process.env.GRUNT_HOSTS.split(',');
+    Object.keys(devHosts).forEach(function(key) {
+      const devHost = devHosts[key].split(':'),
+        devHostAlias = devHost[0],
+        devHostIp = devHost[1];
+
+      this.config.data.exec[`deploy-${devHostAlias}`] = {
+        'command': [
+          '/usr/bin/rsync',
+          '-avz',
+          '--exclude *.swp',
+          ' --port 8011',
+          'dist/',
+          devHostIp + '::' + 'indigo-coll-ext',
+        ].join(' ')
+      };
+    }, grunt);
+  }
 
   grunt.loadNpmTasks("grunt-contrib-pug");
   grunt.loadNpmTasks("grunt-contrib-concat");
   grunt.loadNpmTasks("grunt-contrib-copy");
+  grunt.loadNpmTasks("grunt-exec");
 
   grunt.registerTask("default", ["pug", "concat", "copy"]);
 };
