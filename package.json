@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "description": "Adobe Illustrator Extension for collect layout to Digital Print",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "lint": "eslint src/app.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/robespier/indigo-coll-ext.git"
