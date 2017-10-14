@@ -4,6 +4,7 @@
   "description": "Adobe Illustrator Extension for collect layout to Digital Print",
   "main": "index.js",
   "scripts": {
+    "format": "js-beautify -s 2 -r src/app.js",
     "lint": "eslint src/app.js"
   },
   "repository": {
@@ -26,7 +27,8 @@
     "grunt-contrib-concat": "^1.0.1",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-pug": "^1.0.0",
-    "grunt-contrib-watch": "^1.0.0"
+    "grunt-contrib-watch": "^1.0.0",
+    "js-beautify": "^1.7.4"
   },
   "dependencies": {
     "angular": "^1.6.5"
