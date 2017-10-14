@@ -3,6 +3,7 @@
   "rules": {
     "class-methods-use-this": "off",
     "jsx-a11y/href-no-hash": "off",
-    "linebreak-style": 0
+    "linebreak-style": 0,
+    "no-var": "off"
   }
 }
