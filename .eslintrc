@@ -1,0 +1,8 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "class-methods-use-this": "off",
+    "jsx-a11y/href-no-hash": "off",
+    "linebreak-style": 0
+  }
+}
