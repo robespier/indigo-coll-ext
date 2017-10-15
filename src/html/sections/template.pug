@@ -1,7 +1,7 @@
 block body
   .section
     p Шаблон
-      form
-        input.input(ng-model="workset.template_number" ng-change="validateTemplate()" type="text")
-        span.reportSearch(ng-bind="workset.template_alert.message")
+      form(ng-model="workset.template.number")
+        input.input(ng-model="workset.template.number" ng-change="validateTemplate()" type="text")
+        span.reportSearch(ng-bind="workset.template.message")
   hr
