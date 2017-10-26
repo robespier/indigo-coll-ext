@@ -57,9 +57,9 @@ module.exports = (grunt) => {
   if (process.env.GRUNT_HOSTS) {
     const devHosts = process.env.GRUNT_HOSTS.split(',');
     Object.keys(devHosts).forEach((key) => {
-      const devHost = devHosts[key].split(':'),
-        devHostAlias = devHost[0],
-        devHostIp = devHost[1];
+      const devHost = devHosts[key].split(':');
+      const devHostAlias = devHost[0];
+      const devHostIp = devHost[1];
 
       grunt.config.data.exec[`deploy-${devHostAlias}`] = {
         command: [
