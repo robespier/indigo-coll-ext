@@ -68,7 +68,7 @@ module.exports = (grunt) => {
           '--exclude *.swp',
           ' --port 8011',
           'dist/',
-          `${devHostIp}::` + 'indigo-coll-ext',
+          `${devHostIp}::indigo-coll-ext`,
         ].join(' '),
       };
     });
