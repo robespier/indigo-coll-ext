@@ -61,7 +61,7 @@ module.exports = (grunt) => {
       const devHostAlias = devHost[0];
       const devHostIp = devHost[1];
 
-      grunt.config.data.exec[`deploy-${devHostAlias}`] = {
+      grunt.config.set(`exec.deploy-${devHostAlias}`, {
         command: [
           '/usr/bin/rsync',
           '-avz',
@@ -70,7 +70,7 @@ module.exports = (grunt) => {
           'dist/',
           `${devHostIp}::indigo-coll-ext`,
         ].join(' '),
-      };
+      });
     });
   }
 
