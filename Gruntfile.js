@@ -51,8 +51,8 @@ module.exports = (grunt) => {
   /**
    * Deploy changes with rsync on remote machines using `exec` tasks
    * Export host list in follow form:
-   * export GRUNT_HOSTS="local:127.0.0.1,corr1:192.168.0.152,mari:192.168.0.172"
-   * Then, run `grunt exec:deploy-corr1`
+   * export GRUNT_HOSTS="corr1:192.168.0.152[:8011],mari:192.168.0.172"
+   * Then, run `grunt exec:deploy-corr1` or `grunt exec:deploy-mari`
    */
   if (process.env.GRUNT_HOSTS) {
     const devHosts = process.env.GRUNT_HOSTS.split(',');
@@ -60,15 +60,16 @@ module.exports = (grunt) => {
       const devHost = devHosts[key].split(':');
       const devHostAlias = devHost[0];
       const devHostIp = devHost[1];
+      const devHostPort = devHost[2] || 8011;
 
       grunt.config.set(`exec.deploy-${devHostAlias}`, {
         command: [
           '/usr/bin/rsync',
           '-avz',
           '--exclude *.swp',
-          ' --port 8011',
+          ` --port ${devHostPort}`,
           'dist/',
-          `${devHostIp}::indigo-coll-ext`,
+          `${devHostIp}::<%= pkg.name %>`,
         ].join(' '),
       });
     });
