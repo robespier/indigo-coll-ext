@@ -1,6 +1,6 @@
 const path = require('path');
 
-module.exports = function (grunt) {
+module.exports = (grunt) => {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     pug: {
@@ -56,12 +56,12 @@ module.exports = function (grunt) {
    */
   if (process.env.GRUNT_HOSTS) {
     const devHosts = process.env.GRUNT_HOSTS.split(',');
-    Object.keys(devHosts).forEach(function (key) {
+    Object.keys(devHosts).forEach((key) => {
       const devHost = devHosts[key].split(':'),
         devHostAlias = devHost[0],
         devHostIp = devHost[1];
 
-      this.config.data.exec[`deploy-${devHostAlias}`] = {
+      grunt.config.data.exec[`deploy-${devHostAlias}`] = {
         command: [
           '/usr/bin/rsync',
           '-avz',
@@ -71,7 +71,7 @@ module.exports = function (grunt) {
           `${devHostIp}::` + 'indigo-coll-ext',
         ].join(' '),
       };
-    }, grunt);
+    });
   }
 
   grunt.loadNpmTasks('grunt-contrib-pug');
