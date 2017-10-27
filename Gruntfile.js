@@ -2,6 +2,9 @@ const path = require('path');
 
 const pugData = require('./src/html/index.json');
 
+const lang = process.env.BUILD_LANG || 'ru';
+const strings = require('./src/i18n')[lang];
+
 module.exports = (grunt) => {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -9,7 +12,7 @@ module.exports = (grunt) => {
       compile: {
         options: {
           pretty: true,
-          data: pugData,
+          data: Object.assign({}, pugData, strings),
         },
         files: {
           'dist/index.html': ['src/html/index.pug'],
