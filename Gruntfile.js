@@ -1,5 +1,7 @@
 const path = require('path');
 
+const pugData = require('./src/html/index.json');
+
 module.exports = (grunt) => {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -7,7 +9,7 @@ module.exports = (grunt) => {
       compile: {
         options: {
           pretty: true,
-          data: 'src/html/index.json',
+          data: pugData,
         },
         files: {
           'dist/index.html': ['src/html/index.pug'],
