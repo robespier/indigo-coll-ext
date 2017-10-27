@@ -1,6 +1,6 @@
 block body
   .section
-    p Намотка
+    p= locals.t.roll
       .rollParams
         select(
           ng-model="default.roll_method"
