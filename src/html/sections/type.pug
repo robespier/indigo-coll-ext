@@ -1,0 +1,8 @@
+block body
+  .section
+    p= locals.t.type
+      ul.type
+        li.li(ng-repeat="type in workset.coll_type")
+          input(ng-model="workset.coll_type[$index].used" type="checkbox")
+          span.input(ng-bind="workset.coll_type[$index].name")
+  hr

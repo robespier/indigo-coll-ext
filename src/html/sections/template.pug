@@ -1,6 +1,6 @@
 block body
   .section
-    p Шаблон
+    p= locals.t.template
       form
         input.input(ng-model="workset.template_number" ng-change="validateTemplate()" type="text")
         span.reportSearch(ng-bind="workset.template_alert.message")

@@ -1,6 +1,6 @@
 block body
   .section
-    p Красочность
+    p= locals.t.inks
       ul.ink
         li(ng-repeat="ink in workset.inks")
           input(ng-model="workset.inks[$index].used" ng-change="calcHF()" type="checkbox")

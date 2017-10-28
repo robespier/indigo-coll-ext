@@ -1,6 +1,6 @@
 block body
   .section
-    p Этикетки
+    p= locals.t.labels
       .section
         ol
           li.li(ng-repeat="label in workset.label_stock")
