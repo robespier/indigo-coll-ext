@@ -1,26 +1,26 @@
-(function() {
-  var app = angular.module("ice", []);
-  app.controller("ext", ["$scope", function($scope) {
+(function () {
+  var app = angular.module('ice', []);
+  app.controller('ext', ['$scope', function($scope) {
 
       $scope.workset = {
-        template_number: "",
+        template_number: '',
         template_alert: {
-          message: "",
-          status: ""
+          message: '',
+          status: ''
         },
         roll_method: [
-          {value: "hand", name: "Ручная"},
-          {value: "auto", name: "Автоматическая"}
+          {value: 'hand', name: 'Ручная'},
+          {value: 'auto', name: 'Автоматическая'}
         ],
         roll_type: [
-          {value: "outside", name: "Наружная"},
-          {value: "inside", name: "Внутренняя"}
+          {value: 'outside', name: 'Наружная'},
+          {value: 'inside', name: 'Внутренняя'}
         ],
         roll_direct: [
-          {value: "head_mashine", name: "Головой к машине"},
-          {value: "foot_mashine", name: "Ногами к машине"},
-          {value: "foot_forward", name: "Ногами вперед"},
-          {value: "head_forward", name: "Головой вперед"}
+          {value: 'head_mashine', name: 'Головой к машине'},
+          {value: 'foot_mashine', name: 'Ногами к машине'},
+          {value: 'foot_forward', name: 'Ногами вперед'},
+          {value: 'head_forward', name: 'Головой вперед'}
         ],
         roll_number: 0,
         select: [
@@ -29,19 +29,20 @@
         ],
         label_stock: [],
         inks: [
-  				{name: "Opaque", label: "white", used: false},
-  				{name: "Cyan", label: "cyan", used: true},
-  				{name: "Magenta", label: "magenta", used: true},
-  				{name: "Yellow", label: "yellow", used: true},
-  				{name: "Black", label: "black", used: true},
-  				{name: "Orange", label: "orange", used: false},
-  				{name: "Violet", label: "blue", used: false}
+  				{name: 'Opaque', label: 'white', used: false},
+  				{name: 'Cyan', label: 'cyan', used: true},
+  				{name: 'Magenta', label: 'magenta', used: true},
+  				{name: 'Yellow', label: 'yellow', used: true},
+  				{name: 'Black', label: 'black', used: true},
+  				{name: 'Orange', label: 'orange', used: false},
+  				{name: 'Violet', label: 'blue', used: false}
   			],
-        hot_folder: "CMYK",
-        collection_type: [
-          {value: "standart", name: "Стандартная", used: true},
-          {value: "approve", name: "Утверждение", used: false},
-          {value: "divider", name: "Разделитель", used: false}
+        hot_folder: 'CMYK',
+        coll_type: [
+          {value: 'standart', name: 'Стандартная', used: true},
+          {value:'column', name: 'По ручьям', used: false},
+          {value: 'approve', name: 'Утверждение', used: false},
+          {value: 'divider', name: 'Разделитель', used: false}
         ]
       };
 
@@ -66,7 +67,7 @@
 
 
     /**
-     * Переводит массив "0"/"1" из двоичной системы в десятичную
+     * Переводит массив '0'/'1' из двоичной системы в десятичную
      *
      * @param {array} dec Array
      * @return {int} out
@@ -89,15 +90,15 @@
      * @return {string} hotfolderName
      */
     function getHotFolder(num) {
-      var hotfolderName = "";
+      var hotfolderName = '';
       if (num % 4 === 0) {
         if (num <= 60) {
-          hotfolderName = "CMYK";
+          hotfolderName = 'CMYK';
         } else {
-          hotfolderName = "CMYKW";
+          hotfolderName = 'CMYKW';
         }
       } else {
-        hotfolderName = "CMYKOV_White";
+        hotfolderName = 'CMYKOV_White';
       }
       return hotfolderName;
     };
@@ -110,12 +111,12 @@
     $scope.setRollMethod = function(roll_method, roll_type, roll_direct) {
       var roll_number;
       switch (roll_method) {
-        case "hand":
+        case 'hand':
           roll_number = 0;
           this.workset.roll_number = roll_number;
           this.default.select = true;
           break;
-        case "auto":
+        case 'auto':
           roll_number = this.getRollNumber(roll_type, roll_direct);
           this.default.roll_number = roll_number;
           this.default.select = false;
@@ -130,28 +131,28 @@
      */
     $scope.getRollNumber = function(r_type, r_direct) {
       var r_number;
-      if ((r_type === "outside") && (r_direct === "head_mashine")) {
+      if ((r_type === 'outside') && (r_direct === 'head_mashine')) {
         r_number = 1;
       }
-      if ((r_type === "inside") && (r_direct === "head_mashine")) {
+      if ((r_type === 'inside') && (r_direct === 'head_mashine')) {
         r_number = 6;
       }
-      if ((r_type === "outside") && (r_direct === "foot_mashine")) {
+      if ((r_type === 'outside') && (r_direct === 'foot_mashine')) {
         r_number = 2;
       }
-      if ((r_type === "inside") && (r_direct === "foot_mashine")) {
+      if ((r_type === 'inside') && (r_direct === 'foot_mashine')) {
         r_number = 5;
       }
-      if ((r_type === "outside") && (r_direct === "foot_forward")) {
+      if ((r_type === 'outside') && (r_direct === 'foot_forward')) {
         r_number = 3;
       }
-      if ((r_type === "inside") && (r_direct === "foot_forward")) {
+      if ((r_type === 'inside') && (r_direct === 'foot_forward')) {
         r_number = 7;
       }
-      if ((r_type === "outside") && (r_direct === "head_forward")) {
+      if ((r_type === 'outside') && (r_direct === 'head_forward')) {
         r_number = 4;
       }
-      if ((r_type === "inside") && (r_direct === "head_forward")) {
+      if ((r_type === 'inside') && (r_direct === 'head_forward')) {
         r_number = 8;
       }
       this.workset.roll_number = r_number;
@@ -163,14 +164,14 @@
      */
 
       $scope.addLabels = function () {
-        var path = require("path");
-        var dialog = cep.fs.showOpenDialog(true, false, "Выберите этикетки", "Y:", ["eps"]);
+        var path = require('path');
+        var dialog = cep.fs.showOpenDialog(true, false, 'Выберите этикетки', 'Y:', ['eps']);
         if(dialog.err) {
-          alert("что-то пошло не так...")
+          alert('что-то пошло не так...')
         } else {
             for (var i = 0; i < dialog.data.length; i++) {
               var ext = path.extname(dialog.data[i]);
-              if (ext === ".eps") {
+              if (ext === '.eps') {
                 this.workset.label_stock.push(dialog.data[i]);
               }
             };
@@ -213,8 +214,8 @@
      */
 
      $scope.getLabelName = function (label_path) {
-       var path = require("path");
-       var name = path.basename(label_path, ".eps");
+       var path = require('path');
+       var name = path.basename(label_path, '.eps');
        return name;
      };
 
@@ -225,21 +226,21 @@
 
      $scope.validateTemplate = function() {
        var template = $scope.workset.template_number;
-       if(template == "") {
-          $scope.workset.template_alert.message = "Bведите номер шаблона";
+       if(template == '') {
+          $scope.workset.template_alert.message = 'Bведите номер шаблона';
        } else {
-           var fs = require("fs");
-           var template_root = "T:";
+           var fs = require('fs');
+           var template_root = 'T:';
            fs.readdir(template_root, function(err, files) {
              if (err) {
-               alert("Папка шаблонов пуста");
+               alert('Папка шаблонов пуста');
              } else {
                for (var i = 0; i < files.length; i++) {
-                 if (template + ".ait" == files[i]) {
-                   $scope.workset.template_alert.message = "Шаблон найден";
+                 if (template + '.ait' == files[i]) {
+                   $scope.workset.template_alert.message = 'Шаблон найден';
                    break;
                  } else {
-                   $scope.workset.template_alert.message = "Шаблон не найден";
+                   $scope.workset.template_alert.message = 'Шаблон не найден';
                    }
                }
              }
@@ -252,26 +253,26 @@
    * Проверка доступности ресурсов (сетевых дисков)
    *
    * Для нормальной работы приложения должны быть подключены три сетевых диска:
-    - Диск "T" - template
-    - Диск "Y" - jobcontainer
-    - Диск "H" - hotfolder
+    - Диск 'T' - template
+    - Диск 'Y' - jobcontainer
+    - Диск 'H' - hotfolder
    */
 
-  var fs = require("fs");
-  var template_root = "T:";
-  var jobcontainer_root = "Y:";
-  var hotfolder_root = "H:";
+  var fs = require('fs');
+  var template_root = 'T:';
+  var jobcontainer_root = 'Y:';
+  var hotfolder_root = 'H:';
   fs.stat(template_root, function(err, stats) {
     if (err) {
-      alert("Подключите сетевой диск 'T' для директории с шаблонами.\nДля закрытия этого окна нажмите клавишу 'Esc'");
+      alert('Подключите сетевой диск [T] для директории с шаблонами.\n\nДля закрытия этого окна нажмите клавишу [Enter]');
     } else {
       fs.stat(jobcontainer_root, function(err, stats) {
         if (err) {
-          alert("Подключите сетевой диск 'Y' для директории с рабочими файлами.\nДля закрытия этого окна нажмите клавишу 'Esc'");
+          alert('Подключите сетевой диск Y для директории с рабочими файлами.\n\nДля закрытия этого окна нажмите клавишу [Enter]');
         } else {
           fs.stat(hotfolder_root, function(err, stats) {
             if (err) {
-              alert("Подключите сетевой диск 'H' для директории с 'горячими' папками.\nДля закрытия этого окна нажмите клавишу 'Esc'");
+              alert('Подключите сетевой диск H для директории с [горячими] папками.\n\nДля закрытия этого окна нажмите клавишу [Enter]');
             }
           })
         }
