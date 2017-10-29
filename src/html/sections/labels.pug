@@ -1,11 +1,11 @@
 block body
   .section
-    p= locals.t.labels
+    p= locals.t.labels.name
       .section
         ol
           li.li(ng-repeat="label in workset.label_stock")
             p(ng-bind="getLabelName(workset.label_stock[$index])")
   .section#sectionButton
-    button.hostButton(ng-click="addLabels()") Добавить
-    button.hostButton(ng-click="removeLabels()") Удалить все
+    button.hostButton(ng-click="addLabels()")= locals.t.labels.add
+    button.hostButton(ng-click="removeLabels()")= locals.t.labels.remove
   hr
