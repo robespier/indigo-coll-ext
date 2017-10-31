@@ -3,8 +3,9 @@ block body
     p= locals.t.inks
       ul.ink
         li(ng-repeat="ink in workset.inks")
-          input(ng-model="workset.inks[$index].used" ng-change="calcHF()" type="checkbox")
-          svg.sampleColor
-            rect(style="fill:{{workset.inks[$index].label}}" width="13" height="13" x="0" y="0")
-          span.input(ng-bind="workset.inks[$index].name")
+          label
+            input(ng-model="workset.inks[$index].used" ng-change="calcHF()" type="checkbox")
+            svg.sampleColor
+              rect(style="fill:{{workset.inks[$index].label}}" width="13" height="13" x="0" y="0")
+            span.input(ng-bind="workset.inks[$index].name")
   hr
