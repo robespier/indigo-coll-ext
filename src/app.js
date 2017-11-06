@@ -83,17 +83,12 @@
         used: false,
       }],
       hot_folder: 'CMYK',
-      coll_type: [{
+      primary_type: [{
         value: 'standart',
         name: 'Стандартная',
         used: true,
-      },
-      {
-        value: 'column',
-        name: 'По ручьям',
-        used: false,
-      },
-      {
+      }],
+      secondary_type: [{
         value: 'approve',
         name: 'Утверждение',
         used: false,
@@ -222,13 +217,13 @@
     */
     function setCollType(len) {
       if (len > 1) {
-        $scope.workset.coll_type[0].used = true;
-        $scope.workset.coll_type[2].used = true;
-        $scope.workset.coll_type[3].used = true;
+        $scope.workset.primary_type[0].used = true;
+        $scope.workset.secondary_type[0].used = true;
+        $scope.workset.secondary_type[1].used = true;
       } else {
-        $scope.workset.coll_type[0].used = true;
-        $scope.workset.coll_type[2].used = false;
-        $scope.workset.coll_type[3].used = false;
+        $scope.workset.primary_type[0].used = true;
+        $scope.workset.secondary_type[0].used = false;
+        $scope.workset.secondary_type[1].used = false;
       }
     }
 

@@ -2,8 +2,12 @@ block body
   .section
     p= locals.t.type
       ul.type
-        li.li(ng-repeat="type in workset.coll_type")
+        li.li(ng-repeat="type in workset.primary_type")
           label
-            input(ng-model="workset.coll_type[$index].used" type="checkbox")
-            span.input(ng-bind="workset.coll_type[$index].name")
+            input(ng-model="workset.primary_type[$index].used" type="checkbox")
+            span.input(ng-bind="workset.primary_type[$index].name")
+        li.li(ng-repeat="type in workset.secondary_type")
+          label
+            input(ng-model="workset.secondary_type[$index].used" type="checkbox")
+            span.input(ng-bind="workset.secondary_type[$index].name")
   hr
